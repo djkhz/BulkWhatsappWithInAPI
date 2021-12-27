@@ -1,15 +1,16 @@
 
 * {
   box-sizing: border-box;
-  color: black;
+  user-select: none;
 }
 
 body {
   margin: 0;
   padding: 0;
   font-size: 16px;
-font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-  Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  background-color: #eee;
 }
 
 .main-div {
@@ -101,9 +102,199 @@ h6 {
   align-items: flex-start;
 }
 
+
 .Status{
   position: absolute;
   height: 800px;
   left: 340px;
   top: 90px;
+}
+
+.main-msg{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.msg-header{
+  height: 100px;
+  background-color: #036814;
+  position: fixed;
+  width: 800px;
+  left: 550px;
+  top: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 10px 20px;
+  border: 2px solid #036814;
+  border-bottom: none;
+
+}
+
+.Message-1{
+  background-color: #fff;
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+}
+
+.message_text{
+  color: #000;
+  font-size: 1.4rem;
+  padding: 5px;
+  border: 1px solid #fff;
+  font-weight: normal;
+  box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.delete {
+  position: absolute;
+  right: 7px;
+  border: 1px solid #fff;
+  cursor: pointer;
+}
+
+.delete-msg {
+  font-weight: normal;
+  padding: 1px 20px;
+}
+
+.main-msg{
+  width: 800px;
+  height: 810px;
+  border: 1px solid #036814;
+  border-top: none;
+  position: fixed;
+  left: 550px;
+  top: 110px;
+}
+
+.msg{
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  width: 100%;
+  height: 100%;
+  margin-top: 20px;
+}
+
+#MessageText{
+  border: 1px solid #000;
+  overflow: scroll;
+  resize: none;
+}
+
+#MessageText:focus {
+  outline: none;
+}
+
+.sending{
+  position: absolute;
+  opacity: 0.9;
+  background-color: #fff;
+  width: 40rem;
+  height: 20rem;
+  border: 2px solid #036814;
+  z-index: 1;
+  box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 1), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  display: none;
+}
+
+.sendingMsg{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100%;
+}
+
+.sendingBtn{
+  position: absolute;
+  bottom: 4px;
+  right: 4px;
+  cursor: pointer;
+
+}
+
+.sendMsgBtn{
+  background-color: #036814;
+  border: none;
+  width: 150px;
+  height: 55px;
+  color: #fff;
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+  padding:0;
+  cursor: pointer;
+}
+
+.sending h3{
+  color: #00fa2a;
+  font-size: 3rem;
+}
+
+.send{
+  background-color: #036814;
+  width: 150px;
+  height: 55px;
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.Send-Text{
+  padding: 10px;
+}
+
+.Token{
+  position: fixed;
+  right: 350px;
+  top: 10px;
+  margin: 0;
+}
+
+.Token2{
+  right: 240px;
+}
+
+.Token3{
+  right: 130px;
+}
+
+.Token4{
+  right: 20px;
+}
+
+.show_result {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-top: 70px;
+  margin-right: 10px;
+}
+
+.Log{
+  position: fixed;
+  right: 20px;
+  top: 120px;
+  width: 430px;
+  height: 60px;
+}
+
+.whatsappResult{
+  position: fixed;
+  right: 20px;
+  top: 120px;
+  width: 430px;
+}
+
+.instagram{
+  font-size: 1.2rem;
+  font-weight: bold;
 }

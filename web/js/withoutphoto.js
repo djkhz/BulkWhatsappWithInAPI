@@ -4,6 +4,8 @@ let Back = document.querySelectorAll('h3[data-herf]');
 let forwardIcon = document.querySelectorAll('.forwardIcon[data-href]');
 let iicon = document.querySelectorAll('.iicons[data-href]');
 let h3icon = document.querySelectorAll('.h3Icons[data-href]');
+let deleteMsg = document.querySelector('.delete');
+let textArea = document.querySelector('#MessageText');
 
 function theClick(n){
     let nTarget = n.target;
@@ -26,5 +28,13 @@ for(let i = 0; i < Tags.length; i++){
     forwardIcons.addEventListener('click', theClick);
     iicons.addEventListener('click', theClick);
     h3icons.addEventListener('click', theClick);
-    BackTag.addEventListener('click', theClick);
+    // BackTag.addEventListener('click', theClick);
 }
+
+
+function RestTextArea(){
+    textArea.value = textArea.value.replace(textArea.value, '');
+}
+
+deleteMsg.addEventListener("click", RestTextArea);
+
