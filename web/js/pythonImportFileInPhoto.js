@@ -2,13 +2,14 @@ const importBtn = document.querySelector('.import');
 const h4 = document.querySelector('#h4');
 const show_numbers = document.querySelector('.show_numbers');
 const tagTextArea = document.querySelector('#MessageText');
-const send = document.querySelector('.send');
 const SendingMessage = document.querySelector('.sending');
 const showResult = document.querySelector('.show_result');
 const sendLog = document.querySelector('.send_log');
 const snedMsgBtn = document.querySelector('.sendingBtn');
 const finshed = document.querySelector('.Finshed');
-const finMsgBtn = document.querySelector('.finMsgMainbtn');
+const finMsgBtn = document.querySelector('.finMsgBtn');
+const ImgBtn = document.querySelector('.photo');
+const sendImg = document.querySelector('.sendPhoto');
 const showLogBtn = document.querySelector('.showLogBtn');
 const ProgramLog = document.querySelector('.ProgramLog');
 const LogBtn = document.querySelector('.Token4');
@@ -38,13 +39,6 @@ function addNumbers(Numbers){
 }
 eel.expose(addNumbers);
 
-function Message(){
-  valueTextArea = tagTextArea.value;
-  eel.Get_Message(valueTextArea);
-  SendingMessage.style.display = "block";
-}
-
-send.addEventListener('click', Message);
 
 function Result(text){
   showResult.innerHTML += text + "<br>";
@@ -76,6 +70,20 @@ function FinBtn(){
 
 finMsgBtn.addEventListener('click', FinBtn);
 
+function selectPoto(){
+  eel.selectImg();
+  console.log("clicked")
+}
+ImgBtn.addEventListener('click', selectPoto);
+
+function MessageImg(){
+  valueTextArea = tagTextArea.value;
+  eel.Get_Message_Photo(valueTextArea);
+  SendingMessage.style.display = "block";
+}
+
+sendImg.addEventListener('click', MessageImg);
+
 function startLog(){
   ProgramLog.style.display = 'block';
 }
@@ -87,7 +95,6 @@ function finLog(){
 }
 
 showLogBtn.addEventListener('click', finLog);
-
 
 function showLogProgramMsg(Msg){
   showLogProgram.innerHTML +=  "<br>" + Msg + "<br>";
@@ -108,8 +115,9 @@ hideSettingsBtn.addEventListener('click', hideSettings);
 
 function getInputOneValue() {
   inputOneValue = input1.value;
-  inputTwoValue = input2.value
-  eel.getInputValue(inputOneValue, inputTwoValue)
 }
 
-submit.addEventListener('click', getInputOneValue);
+function puplishData(){
+  eel.expose(getInputOneValue);
+}
+submit.addEventListener('click', puplishData );

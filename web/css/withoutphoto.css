@@ -271,6 +271,98 @@ h6 {
   right: 20px;
 }
 
+.ProgramLog {
+  background-color: #fff;
+  width: 45rem;
+  height: 50rem;
+  display: block;
+  position: absolute;
+  box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 1), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  z-index: 2;
+  border: 1px solid #036814;
+  display: none;
+}
+
+.LogTitle{
+  display: flex;
+  justify-content: center;
+}
+
+.LogTitle h1 {
+  font-size: 2rem;
+  border: 2px solid rgb(255, 132, 153);
+  padding: 10px 45px;
+  border-radius: 4px;
+}
+
+.main_token {
+  background-color: #fff;
+  width: 45rem;
+  height: 50rem;
+  display: block;
+  position: absolute;
+  box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 1), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  z-index: 2;
+  border: 1px solid #036814;
+  display: none;
+}
+
+.SettingsBody {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.LogTitle > h1 {
+  margin: 0;
+}
+
+.Note > h2 > span{
+  color: #00fa2a;
+  user-select: text;
+}
+
+.video {
+  margin-bottom: 70px;
+  display: flex;
+  justify-content: center;
+}
+
+.SettingsBody > form{
+  width: 310px;
+}
+
+.input{
+  padding: 10px 10px;
+  margin: 5px;
+  width: 100%;
+  border: none;
+  background-color: #eee;
+  font-size: 1.4rem;
+  transition: width .35s ease-in-out;
+}
+
+.submit{
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+  padding: 16px 32px;
+  text-decoration: none;
+  margin: 4px 2px;
+  cursor: pointer;
+  font-size: 1.4rem;
+  padding: 10px 10px;
+  margin: 5px;
+  width: 100%;
+}
+
+.input:focus {
+  width: 400px;
+  outline: none;
+}
+
+
 .show_result {
   display: flex;
   flex-direction: column;
