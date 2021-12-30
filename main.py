@@ -4,6 +4,7 @@ import eel, os, requests, random, emoji
 
 eel.init('web')
 
+# get emojis name to print it in final Msg
 emojis = [':grinning_face:', ':star:', ':dizzy:', ':collision:',
 		  ':raised_hand:', ':sunglasses:', ':sparkles:', ':fire:', ':open_hands:',
 		  ':cloud:', ':snowman:', ':cyclone:', ':bear:', ':paw_prints:', ':cherry_blossom:',
@@ -32,33 +33,33 @@ emojis = [':grinning_face:', ':star:', ':dizzy:', ':collision:',
 @eel.expose
 def selectFolder():
 	Tk().withdraw()
-	location = os.system('dir')
+	location = os.system('dir') #get location for {choosen}
 	global choosen
-	choosen = askopenfilename(initialdir=location, filetypes=[("Text files", "*.txt")])
-	print(choosen)
+	choosen = askopenfilename(initialdir=location, filetypes=[("Text files", "*.txt")]) # just text files
+	print(choosen) # testing
 	file = open(choosen)
-	len_lines_on_file = len(file.readlines())
-	eel.addText(len_lines_on_file)
+	len_lines_on_file = len(file.readlines()) # get how many lines in the file to do for loop
+	eel.addText(len_lines_on_file) # {addText} javascript function {eel} method to get that function
 	for i in range(len_lines_on_file):
 		with open(choosen) as content_of_file:
 			content_of_file2 = content_of_file.readlines()
-			eel.addNumbers(f'+{content_of_file2[i]}')
+			eel.addNumbers(f'+{content_of_file2[i]}') # {eel.addNumbers} function on JS
 	file.close()
 
 @eel.expose
-def getInputValue(value1, value2):
-	accNamewrite = open("settings/accName.txt", mode='w')
+def getInputValue(value1, value2): # will get the value1 and value2 from JS {Front-End}
+	accNamewrite = open("settings/accName.txt", mode='w') # write to file Instance ID from UltraMsg.com
 	final_value = accNamewrite.write(value1)
 	accNamewrite.close()
-	tokenwrite = open('settings/token.txt', mode='w')
+	tokenwrite = open('settings/token.txt', mode='w') # write to file Token from UltraMsg.com
 	final_token_value = tokenwrite.write(value2)
 	tokenwrite.close()
 
 
 @eel.expose
 def Get_Message(Message):
-	accName = open("settings/accName.txt")
-	token = open('settings/token.txt')
+	accName = open("settings/accName.txt") # reading Instance ID from accName.txt
+	token = open('settings/token.txt') # reading Token from token.txt
 	url = f"https://api.ultramsg.com/{accName.readline()}/messages/chat"
 	file = open(choosen)
 	file_len = len(file.readlines())
@@ -70,13 +71,13 @@ def Get_Message(Message):
 			phone = content_of_the_file.readlines()[i]
 			payload = f"token={token.readline()}&to={phone}&body={Final_Msg}&priority=1"
 			headers = {'content-type': 'application/x-www-form-urlencoded'}
-			response = requests.request("POST", url, data=payload.encode('utf-8'), headers=headers)
+			response = requests.request("POST", url, data=payload.encode('utf-8'), headers=headers) # do the request
 			if response.status_code == 200:
-				eel.Result(f'Sent to +{phone}')
-				eel.Log(i + 1)
+				eel.Result(f'Sent to +{phone}') # {eel.Result} function on JS
+				eel.Log(i + 1) # {eel.Log} function on JS
 				print(f'sent to {phone}')
 				print(response.text)
-				eel.showLogProgramMsg(response.text)
+				eel.showLogProgramMsg(response.text) # {eel.showLogProgramMsg} function on JS
 			else:
 				eel.Result(f'something wrong in: +{phone}')
 				print(response.text)
@@ -86,10 +87,10 @@ def Get_Message(Message):
 	accName.close()
 	token.close()
 	file.close()
-	eel.finshMsg()
+	eel.finshMsg() # {eel.finshMsg} function on JS print finish Msg
 
 
-
+# Image version
 @eel.expose
 def selectImg():
 	Tk().withdraw()
