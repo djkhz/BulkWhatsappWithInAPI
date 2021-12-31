@@ -390,3 +390,13 @@ h6 {
   font-size: 1.2rem;
   font-weight: bold;
 }
+
+.photoLocation{
+  position: absolute;
+  bottom: 25px;
+  left: 120px;
+  border: 1px solid salmon;
+  width: 450px;
+  padding: 7px 5px;
+  overflow: scroll;
+}

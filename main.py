@@ -1,5 +1,6 @@
 from tkinter.filedialog import askopenfilename
 from tkinter import *
+from filestack import Client
 import eel, os, requests, random, emoji
 
 eel.init('web')
@@ -98,6 +99,7 @@ def selectImg():
 	global choosenImg
 	choosenImg = askopenfilename(initialdir=location, filetypes=[("Image", "*.JPEG *.jpg *.jpeg *.jfif *.pjpeg *.pjp *.png *.gif *.svg")])
 	print(choosenImg)
+	eel.getPhotoLocationContent(choosenImg)
 
 
 @eel.expose
@@ -107,13 +109,16 @@ def Get_Message_Photo(PhotoMessage):
 	url = f"https://api.ultramsg.com/{accName.readline()}/messages/image"
 	file = open(choosen)
 	file_len = len(file.readlines())
+	client = Client('AwYzCA0oQSwqgUt8QbuEez')
+	new_filelink = client.upload(filepath=choosenImg)
+	print(new_filelink.url)
 	for i in range(file_len):
 		chosseEmoji = emoji.emojize(random.choice(emojis))
 		chosseEmoji2 = emoji.emojize(random.choice(emojis))
 		Final_Msg = f'{PhotoMessage} {chosseEmoji} {chosseEmoji2}'
 		with open(choosen) as content_of_the_file:
 			phone = content_of_the_file.readlines()[i]
-			payload = f"token={token.readline()}&to={phone}&image=http://localhost/{choosenImg}&caption={Final_Msg}"
+			payload = f"token={token.readline()}&to={phone}&image={new_filelink.url}&caption={Final_Msg}"
 			headers = {'content-type': 'application/x-www-form-urlencoded'}
 			response = requests.request("POST", url, data=payload.encode('utf-8'), headers=headers)
 			if response.status_code == 200 and response.text:
