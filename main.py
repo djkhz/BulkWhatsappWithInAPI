@@ -113,17 +113,17 @@ def Get_Message_Photo(PhotoMessage):
 		Final_Msg = f'{PhotoMessage} {chosseEmoji} {chosseEmoji2}'
 		with open(choosen) as content_of_the_file:
 			phone = content_of_the_file.readlines()[i]
-			payload = f"token={token.readline()}&to={phone}&image=file://{choosenImg}&caption={Final_Msg}"
+			payload = f"token={token.readline()}&to={phone}&image=http://localhost/{choosenImg}&caption={Final_Msg}"
 			headers = {'content-type': 'application/x-www-form-urlencoded'}
 			response = requests.request("POST", url, data=payload.encode('utf-8'), headers=headers)
 			if response.status_code == 200 and response.text:
 				eel.Result(f'Sent to +{phone}')
 				eel.Log(i + 1)
-				print(response.txt)
+				print(response.text)
 				eel.showLogProgramMsg(response.text)
 			else:
 				eel.Result(f'something wrong in this phone Numbers: +{phone}')
-				print(response.txt)
+				print(response.text)
 				eel.showLogProgramMsg(f'something wrong in this phone Numbers:{phone}')
 			eel.sleep(15.0)
 	accName.close()
