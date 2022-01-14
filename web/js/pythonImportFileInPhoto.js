@@ -22,6 +22,8 @@ const input2 = document.querySelector('.input2');
 const submit = document.querySelector('.submit');
 const photoLocationContent = document.querySelector('.photoLocationContent');
 
+document.addEventListener('contextmenu', event => event.preventDefault());
+
 function select(){
     eel.selectFolder();
     console.log("clicked")
@@ -118,11 +120,13 @@ function getInputOneValue() {
   inputOneValue = input1.value;
 }
 
-function puplishData(){
-  eel.expose(getInputOneValue);
+function getInputOneValue() {
+  inputOneValue = input1.value;
+  inputTwoValue = input2.value
+  eel.getInputValue(inputOneValue, inputTwoValue)
 }
-submit.addEventListener('click', puplishData );
 
+submit.addEventListener('click', getInputOneValue);
 function getPhotoLocationContent(location){
   photoLocationContent.innerHTML = location;
 }

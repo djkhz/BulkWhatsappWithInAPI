@@ -104,24 +104,28 @@ def selectImg():
 
 @eel.expose
 def Get_Message_Photo(PhotoMessage):
-	accName = open("settings/accName.txt")
-	token = open('settings/token.txt')
-	url = f"https://api.ultramsg.com/{accName.readline()}/messages/image"
+	accName2 = open("settings/accName.txt")
+	token2 = open('settings/token.txt')
+	url = f"https://api.ultramsg.com/{accName2.readline()}/messages/image"
 	file = open(choosen)
 	file_len = len(file.readlines())
-	client = Client('AwYzCA0oQSwqgUt8QbuEez')
-	new_filelink = client.upload(filepath=choosenImg)
-	print(new_filelink.url)
+	URL = "https://ercess.com//images//events//-Blockchain-2019-36613-banner.png"
+	picture_req = requests.get(URL)
+	if picture_req.status_code == 200:
+		with open("/home/mustafa/Documents/download.jpeg", 'wb') as f:
+			f.write(picture_req.content)
+			print(picture_req.url)
 	for i in range(file_len):
 		chosseEmoji = emoji.emojize(random.choice(emojis))
 		chosseEmoji2 = emoji.emojize(random.choice(emojis))
 		Final_Msg = f'{PhotoMessage} {chosseEmoji} {chosseEmoji2}'
 		with open(choosen) as content_of_the_file:
 			phone = content_of_the_file.readlines()[i]
-			payload = f"token={token.readline()}&to={phone}&image={new_filelink.url}&caption={Final_Msg}"
+			payload = f"token={token2.readline()}&to={phone}&image={picture_req.url}&caption={Final_Msg}"
 			headers = {'content-type': 'application/x-www-form-urlencoded'}
 			response = requests.request("POST", url, data=payload.encode('utf-8'), headers=headers)
-			if response.status_code == 200 and response.text:
+			key = list(response.text.keys())
+			if response.status_code == 200:
 				eel.Result(f'Sent to +{phone}')
 				eel.Log(i + 1)
 				print(response.text)
@@ -129,10 +133,10 @@ def Get_Message_Photo(PhotoMessage):
 			else:
 				eel.Result(f'something wrong in this phone Numbers: +{phone}')
 				print(response.text)
-				eel.showLogProgramMsg(f'something wrong in this phone Numbers:{phone}')
+				eel.showLogProgramMsg(response.text)
 			eel.sleep(15.0)
-	accName.close()
-	token.close()
+	accName2.close()
+	token2.close()
 	file.close()
 	eel.finshMsg()
 

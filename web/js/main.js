@@ -1,5 +1,7 @@
 let aTags = document.querySelectorAll('span[data-href]');
 
+document.addEventListener('contextmenu', event => event.preventDefault());
+
 function onClick(e){
     let target = e.target;
     window.location.replace(target.getAttribute('data-href'));
