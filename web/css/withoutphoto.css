@@ -281,6 +281,7 @@ h6 {
   z-index: 2;
   border: 1px solid #036814;
   display: none;
+  overflow: scroll;
 }
 
 .LogTitle{
@@ -399,4 +400,16 @@ h6 {
   width: 450px;
   padding: 7px 5px;
   overflow: scroll;
+}
+
+
+.names {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  bottom: 250px;
+  left: 36rem;
+  height: 60px;
+  width: 150px;
 }
