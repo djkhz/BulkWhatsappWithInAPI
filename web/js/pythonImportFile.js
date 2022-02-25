@@ -19,6 +19,19 @@ const hideSettingsBtn = document.querySelector('.hideSettingsBtn');
 const input1 = document.querySelector('.input1');
 const input2 = document.querySelector('.input2');
 const submit = document.querySelector('.submit');
+const names = document.querySelector('.names');
+
+
+// new
+
+function SelectNames(){
+  tagTextArea.value = 'Hi {{name}}\n\n' + tagTextArea.value;
+  eel.selectName();
+}
+
+names.addEventListener('click', SelectNames);
+
+// fin new
 
 document.addEventListener('contextmenu', event => event.preventDefault());
 

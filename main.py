@@ -92,6 +92,15 @@ def Get_Message(Message):
 	eel.finshMsg() # {eel.finshMsg} function on JS print finish Msg
 
 
+@eel.expose
+def selectName():
+	Tk().withdraw()
+	location = os.system('dir')
+	names_path = askopenfilename(initialdir=location, filetypes=[("Text files", "*.txt")]) # just text files
+	print(names_path)
+
+
+
 # Image version
 @eel.expose
 def selectImg():

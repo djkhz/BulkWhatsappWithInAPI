@@ -1,7 +1,8 @@
 from tkinter.filedialog import askopenfilename
 from tkinter import *
 from filestack import Client
-import eel, os, requests, random, emoji
+import eel, os, requests, random, emoji, datetime
+
 
 eel.init('web')
 
@@ -29,6 +30,16 @@ emojis = [':grinning_face:', ':star:', ':dizzy:', ':collision:',
 		  ':fire_engine:', ':oncoming_bus:', ':oncoming_police_car:', ':train:',
 		  ':vertical_traffic_light:', ':warning:', ':construction:', ':slot_machine:',
 		  ':circus_tent:', ':performing_arts:', ':round_pushpin:']
+
+
+
+@eel.expose
+def selectName():
+	Tk().withdraw()
+	location = os.system('dir')
+	global names_path
+	names_path = askopenfilename(initialdir=location, filetypes=[("Text files", "*.txt")]) # just text files
+	print(names_path)
 
 
 @eel.expose
@@ -64,11 +75,14 @@ def Get_Message(Message):
 	url = f"https://api.ultramsg.com/{accName.readline()}/messages/chat"
 	file = open(choosen)
 	file_len = len(file.readlines())
+	names = open(names_path)
 	for i in range(file_len):
+		date = datetime.datetime.now()
 		randomNum = random.randint(10, 100)
 		chosseEmoji = emoji.emojize(random.choice(emojis))
 		chosseEmoji2 = emoji.emojize(random.choice(emojis))
-		Final_Msg = f'{Message} {chosseEmoji} {chosseEmoji2}'
+		addNames = names.readlines()[i]
+		Final_Msg = f'Hi {addNames} \n\n{Message} {chosseEmoji} {chosseEmoji2} \n\n{date}'
 		with open(choosen) as content_of_the_file:
 			phone = content_of_the_file.readlines()[i]
 			payload = f"token={token.readline()}&to={phone}&body={Final_Msg}&priority=1"
@@ -90,7 +104,6 @@ def Get_Message(Message):
 	token.close()
 	file.close()
 	eel.finshMsg() # {eel.finshMsg} function on JS print finish Msg
-
 
 # Image version
 @eel.expose
@@ -145,4 +158,4 @@ eel.start('index.html')
 
 
 
-
+# hi there my name is mustafa alkilani what i your name /
