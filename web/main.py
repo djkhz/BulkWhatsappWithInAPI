@@ -1,8 +1,7 @@
 from tkinter.filedialog import askopenfilename
 from tkinter import *
 from filestack import Client
-import eel, os, requests, random, emoji, datetime
-
+import eel, os, requests, random, emoji, time
 
 eel.init('web')
 
@@ -76,16 +75,17 @@ def Get_Message(Message):
 	file = open(choosen)
 	file_len = len(file.readlines())
 	names = open(names_path)
+	final_token = token.readline()
 	for i in range(file_len):
-		date = datetime.datetime.now()
+		date = time.asctime(time.localtime(time.time()))
 		randomNum = random.randint(10, 100)
 		chosseEmoji = emoji.emojize(random.choice(emojis))
 		chosseEmoji2 = emoji.emojize(random.choice(emojis))
-		addNames = names.readlines()[i]
-		Final_Msg = f'Hi {addNames} \n\n{Message} {chosseEmoji} {chosseEmoji2} \n\n{date}'
+		# addNames = names.readlines()[i]
+		Final_Msg = f'Hi {names.readline()} \n\n{Message} \n\n{chosseEmoji} {chosseEmoji2} \n\nTime : \n{date}'
 		with open(choosen) as content_of_the_file:
 			phone = content_of_the_file.readlines()[i]
-			payload = f"token={token.readline()}&to={phone}&body={Final_Msg}&priority=1"
+			payload = f"token={final_token}&to={phone}&body={Final_Msg}&priority=1"
 			headers = {'content-type': 'application/x-www-form-urlencoded'}
 			response = requests.request("POST", url, data=payload.encode('utf-8'), headers=headers) # do the request
 			if response.status_code == 200:
@@ -94,12 +94,15 @@ def Get_Message(Message):
 				print(f'sent to {phone}')
 				print(response.text)
 				eel.showLogProgramMsg(response.text) # {eel.showLogProgramMsg} function on JS
+				eel.showLogProgramMsg(f'next Message after : ({randomNum}) second')
 			else:
 				eel.Result(f'something wrong in: +{phone}')
 				print(response.text)
 				eel.showLogProgramMsg(response.text)
-
+				eel.showLogProgramMsg(f'trying to send next Message after : ({randomNum}) second !!')
+			print(randomNum)
 			eel.sleep(randomNum)
+	names.close()
 	accName.close()
 	token.close()
 	file.close()

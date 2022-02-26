@@ -22,9 +22,11 @@ const submit = document.querySelector('.submit');
 const names = document.querySelector('.names');
 
 
+
 // new
 
 function SelectNames(){
+  valueTextArea = tagTextArea.value
   tagTextArea.value = 'Hi {{name}}\n\n' + tagTextArea.value;
   eel.selectName();
 }
@@ -54,7 +56,6 @@ function addNumbers(Numbers){
 eel.expose(addNumbers);
 
 function Message(){
-  valueTextArea = tagTextArea.value;
   eel.Get_Message(valueTextArea);
   SendingMessage.style.display = "block";
 }
@@ -128,3 +129,4 @@ function getInputOneValue() {
 }
 
 submit.addEventListener('click', getInputOneValue);
+
