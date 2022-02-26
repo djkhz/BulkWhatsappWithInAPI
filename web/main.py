@@ -93,13 +93,13 @@ def Get_Message(Message):
 				eel.Log(i + 1) # {eel.Log} function on JS
 				print(f'sent to {phone}')
 				print(response.text)
-				eel.showLogProgramMsg(response.text) # {eel.showLogProgramMsg} function on JS
-				eel.showLogProgramMsg(f'next Message after : ({randomNum}) second')
+				eel.showLogProgramMsg(f'  {response.text}') # {eel.showLogProgramMsg} function on JS
+				eel.showLogProgramMsg(f'  next Message after : ({randomNum}) second')
 			else:
 				eel.Result(f'something wrong in: +{phone}')
 				print(response.text)
-				eel.showLogProgramMsg(response.text)
-				eel.showLogProgramMsg(f'trying to send next Message after : ({randomNum}) second !!')
+				eel.showLogProgramMsg(f'  {response.text}')
+				eel.showLogProgramMsg(f'  trying to send next Message after : ({randomNum}) second !!')
 			print(randomNum)
 			eel.sleep(randomNum)
 	names.close()

@@ -1,7 +1,7 @@
 from tkinter.filedialog import askopenfilename
 from tkinter import *
 from filestack import Client
-import eel, os, requests, random, emoji
+import eel, os, requests, random, emoji, time
 
 eel.init('web')
 
@@ -29,6 +29,16 @@ emojis = [':grinning_face:', ':star:', ':dizzy:', ':collision:',
 		  ':fire_engine:', ':oncoming_bus:', ':oncoming_police_car:', ':train:',
 		  ':vertical_traffic_light:', ':warning:', ':construction:', ':slot_machine:',
 		  ':circus_tent:', ':performing_arts:', ':round_pushpin:']
+
+
+
+@eel.expose
+def selectName():
+	Tk().withdraw()
+	location = os.system('dir')
+	global names_path
+	names_path = askopenfilename(initialdir=location, filetypes=[("Text files", "*.txt")]) # just text files
+	print(names_path)
 
 
 @eel.expose
@@ -64,14 +74,18 @@ def Get_Message(Message):
 	url = f"https://api.ultramsg.com/{accName.readline()}/messages/chat"
 	file = open(choosen)
 	file_len = len(file.readlines())
+	names = open(names_path)
+	final_token = token.readline()
 	for i in range(file_len):
+		date = time.asctime(time.localtime(time.time()))
 		randomNum = random.randint(10, 100)
 		chosseEmoji = emoji.emojize(random.choice(emojis))
 		chosseEmoji2 = emoji.emojize(random.choice(emojis))
-		Final_Msg = f'{Message} {chosseEmoji} {chosseEmoji2}'
+		# addNames = names.readlines()[i]
+		Final_Msg = f'Hi {names.readline()} \n\n{Message} \n\n{chosseEmoji} {chosseEmoji2} \n\nTime : \n{date}'
 		with open(choosen) as content_of_the_file:
 			phone = content_of_the_file.readlines()[i]
-			payload = f"token={token.readline()}&to={phone}&body={Final_Msg}&priority=1"
+			payload = f"token={final_token}&to={phone}&body={Final_Msg}&priority=1"
 			headers = {'content-type': 'application/x-www-form-urlencoded'}
 			response = requests.request("POST", url, data=payload.encode('utf-8'), headers=headers) # do the request
 			if response.status_code == 200:
@@ -79,27 +93,20 @@ def Get_Message(Message):
 				eel.Log(i + 1) # {eel.Log} function on JS
 				print(f'sent to {phone}')
 				print(response.text)
-				eel.showLogProgramMsg(response.text) # {eel.showLogProgramMsg} function on JS
+				eel.showLogProgramMsg(f'  {response.text}') # {eel.showLogProgramMsg} function on JS
+				eel.showLogProgramMsg(f'  next Message after : ({randomNum}) second')
 			else:
 				eel.Result(f'something wrong in: +{phone}')
 				print(response.text)
-				eel.showLogProgramMsg(response.text)
-
+				eel.showLogProgramMsg(f'  {response.text}')
+				eel.showLogProgramMsg(f'  trying to send next Message after : ({randomNum}) second !!')
+			print(randomNum)
 			eel.sleep(randomNum)
+	names.close()
 	accName.close()
 	token.close()
 	file.close()
 	eel.finshMsg() # {eel.finshMsg} function on JS print finish Msg
-
-
-@eel.expose
-def selectName():
-	Tk().withdraw()
-	location = os.system('dir')
-	names_path = askopenfilename(initialdir=location, filetypes=[("Text files", "*.txt")]) # just text files
-	print(names_path)
-
-
 
 # Image version
 @eel.expose
@@ -154,4 +161,5 @@ eel.start('index.html')
 
 
 
+# hi there my name is mustafa alkilani what i your name /
 

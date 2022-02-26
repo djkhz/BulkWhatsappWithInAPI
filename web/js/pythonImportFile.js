@@ -27,7 +27,7 @@ const names = document.querySelector('.names');
 
 function SelectNames(){
   valueTextArea = tagTextArea.value
-  tagTextArea.value = 'Hi {{name}}\n\n' + tagTextArea.value;
+  tagTextArea.value = 'Hi {{name}}\n\n' + tagTextArea.value + "\n\n{{emoji}}{{emoji}}\n\nTime:\n{{time}}";
   eel.selectName();
 }
 
